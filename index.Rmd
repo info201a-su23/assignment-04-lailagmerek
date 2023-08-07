@@ -1,0 +1,84 @@
+---
+title: "A3: Incarceration"
+author: "Laila Gmerek"
+output: html_document
+---
+```{r setup, include=FALSE}
+source("my_code.R")
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Introduction
+
+In the United States, the issue of incarceration presents a complex and pressing challenge. With America having the highest number of people incarcerated in the world, this phenomenon disproportionately affects people of color, especially Black individuals, due to historical and present-day racism. The consequences of these disparities are far-reaching, necessitating a deeper analysis of the trends and factors contributing to the unequal distribution of incarceration rates.
+
+This assignment focuses on using data analysis and visualization to uncover patterns of inequality within the prison and jail populations. The data is sourced from the Vera Institute, a reputable organization collecting information on incarceration trends. The datasets under consideration provide insights into prison population per county/state, jail population per county/state, and the rate of incarceration per 100,000 people.
+
+The aim of this analysis is twofold: first, to understand the trajectory of prison and jail populations over time; second, to examine how race and gender intertwine with these trends. By conducting this investigation, we hope to identify potential solutions and shed light on areas that require greater attention from the public and policymakers.
+
+As the sole researcher on this project, I have carefully chosen specific variables to analyze, considering their relevance in illuminating the complex dynamics of incarceration in America. Through this exploration, I seek to contribute to a broader understanding of the challenges faced by impacted communities and advocate for social justice and equity.
+
+### Summary Information
+In this analysis, i have examined key variables related to the prison population per county/state. The mean total population is found to be 84,300.51, providing an average representation of the incarcerated population across the regions. On the other hand, the median total population is 22,970, representing the middle value of the prison population when arranged in ascending order.
+
+The standard deviation of the total population is quite high, standing at 303,312.1. This indicates significant variability in incarceration rates across different regions, suggesting potential disparities or areas of concern that warrant attention.
+
+The maximum total population is recorded at 10,120,540, revealing areas with the highest prison population. In contrast, the minimum total population is zero, suggesting that some regions have relatively lower incarceration rates or possibly no incarcerated individuals.
+
+From these findings, I can deduce that there is considerable diversity in the prison population across counties/states, with some regions experiencing higher incarceration rates than others. The wide range of values highlights the need for a comprehensive and nuanced approach to address issues related to incarceration and criminal justice. Understanding such summary statistics can serve as a foundation for further investigations and policy development aimed at fostering more equitable and effective criminal justice systems.
+
+### The Dataset
+
+#### Data Collection
+The data for this assignment was collected by the Vera Institute of Justice. They have compiled county- and jurisdiction-level jail data from 1970 to 2018 and prison data from 1983 to 2016. Additionally, state-level prison data for the years 2019 to 2021 is also included in the dataset.
+
+#### Data Collection Method
+The data was collected through various sources and data collections, including the Census of Jails (COJ) and the Annual Survey of Jails (ASJ), conducted by the Bureau of Justice Statistics (BJS). The COJ covers all jails and is conducted every five to eight years since 1970, while the ASJ covers about one-third of jails, including most of the largest jails, and is conducted in non-census years since 1982. The National Corrections Reporting Program (NCRP) data collection is also used for county-level data.
+
+#### Purpose of Data Collection
+The data was collected to provide a comprehensive understanding of incarceration trends in the United States. By examining jail and prison incarceration data at the county and jurisdiction levels, the Vera Institute seeks to analyze the causes and consequences of high incarceration rates. The ultimate goal is to inform the public dialogue, advance research, and guide changes to justice policy and practice, particularly concerning mass incarceration and its impact on communities.
+
+#### Columns
+There are 36 columns in the data set
+
+#### Rows
+There are 153,811 rows
+
+#### Ethical Considersations
+When working with incarceration data, ethical considerations related to privacy and consent are important. The data likely contains sensitive information about individuals who have been incarcerated. Therefore, researchers must ensure that the data is appropriately anonymized and aggregated to protect the identities of those individuals. Additionally, any analysis that involves demographic characteristics, such as race and gender, should be approached with sensitivity and an understanding of the potential implications of the findings.
+
+### Limitations and Problems
+One possible limitation of the data is that it may not cover more recent years for some variables, as the latest state-level prison data is available up to the year 2021. Researchers should be mindful of potential data gaps and consider how they might impact the analysis.
+
+Another limitation may be the potential underrepresentation of smaller jails or jurisdictions, as the data relies on the Annual Survey of Jails, which covers about one-third of jails. This could introduce sampling biases that need to be taken into account during analysis.
+
+Furthermore, while the dataset provides valuable insights into incarceration trends, it may not capture all factors influencing incarceration rates comprehensively. Additional contextual factors, such as socioeconomic status, drug policies, and other systemic issues, could play a role in the observed trends and would require careful consideration in the analysis.
+
+Researchers should also be aware of any potential biases in the data collection process, such as reporting discrepancies or changes in data collection methodologies over time, which could impact the accuracy and reliability of the findings.
+
+In summary, while the dataset provided by the Vera Institute offers valuable information on incarceration trends, researchers must approach its analysis with awareness of its limitations and potential ethical implications.
+
+
+### Trends Over Time Chart
+#### Prison Population of the Top Two States in the US from 1970-2020
+```{r pressure, echo=FALSE}
+my_plot
+```
+
+The Trends Over Time Chart illustrates the changes in the total incarcerated population across the two largest states, California and Texas, in the United States from the years 1970-2020. The chart shows a consistent upward trend in the incarcerated population, with yearly fluctuations and distinct differences between the two states. The visualization provides valuable insights into the complexities of the criminal justice system, shedding light on potential areas that warrant further investigation or policy attention. This analysis contributes to a deeper understanding of incarceration rates and their implications for social justice and equity, offering valuable context for broader discussions on this critical issue.
+
+### Variable Comparison Chart
+#### White Prison Population vs. Black Prison Population
+```{r, echo=FALSE}
+comparison_plot
+```
+
+The Variable Comparison Chart illustrates the relationship between the white and black prison populations over time. The chart showcases a scatter plot with each point representing the corresponding data point in the dataset. The x-axis represents the 'White Prison Population,' and the y-axis represents the 'Black Prison Population.' As we observe the chart, we can discern patterns and trends that indicate how the two variables are related to each other. This comparison aims to shed light on any disparities or potential correlations in the prison populations between white and black individuals. As one can see the Black Prison Population extents into the 20,000s, while the White Prison Population does not exceed 10,000.
+
+### Map
+#### Prison Population Map
+```{r, echo=FALSE}
+prison_pop_map
+```
+
+The Prison Population Map displays the distribution of incarcerated individuals across the United States based on data sourced from the Vera Institute of Justice. Its inclusion in this analysis aims to visually reveal patterns and disparities in incarceration rates, shedding light on the complex dynamics of the criminal justice system. The map highlights regional concentrations of prison populations, indicating potential differences in state-level policies and practices. It also exposes disparities among states, emphasizing the need for equitable justice reforms. Correlations with demographics, such as race and socioeconomic status, are evident, underscoring the urgency of addressing issues related to mass incarceration and promoting evidence-based policies for a fairer justice system.
+
