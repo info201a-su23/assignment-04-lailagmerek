@@ -5,7 +5,6 @@ library(dplyr)
 library(tidyverse)
 library(scales)
 library(maps)
-
 # Read the data from a CSV file
 data <- read_csv("~/Desktop/info201_summer2023/assignment-04-lailagmerek/us-prison-pop.csv")
 
@@ -59,64 +58,75 @@ min_total_pop_function <- function(){
   return(i)
 }
 
-# Create a trends over time chart
-top_2_states <- data %>%
-  group_by(state) %>%
-  summarise(total_pop = sum(total_pop, na.rm = TRUE)) %>%
-  arrange(desc(total_pop)) %>%
-  top_n(2)  # Replace N with the desired number of states
+# Create trends over time chart
+average_prison_ratios <- data %>%
+  group_by(state, year) %>%
+  summarize(
+    black_to_white_ratio = sum(black_prison_pop, na.rm = TRUE) / sum(white_prison_pop, na.rm = TRUE),
+    average_prison_pop = mean(total_prison_pop, na.rm = TRUE)
+  ) %>%
+  filter(!is.na(average_prison_pop) & !is.na(black_to_white_ratio) & year >= 1990) %>%
+  arrange(state, year)
 
-data_filtered <- data %>%
-  filter(state %in% top_2_states$state)
-
-my_plot <- ggplot(data_filtered, aes(x = year, y = total_pop, color = state)) +
+chart_1 <- ggplot(average_prison_ratios, aes(x = year, y = black_to_white_ratio, color = state)) +
   geom_line() +
-  xlab("Year") +
-  ylab("Total Population of People Incarcerated in the US") +
-  ggtitle("Prison Population Over Time") +
-  scale_color_discrete(name = "States", breaks = top_2_states$state, labels = top_2_states$state)
+  labs(title = "Black to White Inmate Population Ratio in US States Over Time",
+       x = "Year",
+       y = "Black to White Ratio",
+       color = "State") +
+  theme_minimal()
 
-print(my_plot)
+print(chart_1)
 
 # Create a variable comparison chart
-white_prison_pop <- data$white_prison_pop
-black_prison_pop <- data$black_prison_pop
+filtered_data <- data %>%
+  filter(county_name == "King County" & year >= 1990 & 
+           year <= 2018 & !is.na(black_prison_pop)) %>%
+  select(year, black_prison_pop)
 
-comparison_plot <- ggplot(data, aes(x = white_prison_pop, y = black_prison_pop)) +
+chart_2 <- ggplot(filtered_data, aes(x = year, y = black_prison_pop)) +
   geom_point() +
-  xlab("White Prison Population") + 
-  ylab("Black Prison Population")
+  labs(title = "Black Prison Population in King County, WA",
+       x = "Year (1990-2018)",
+       y = "Black Prison Population") +
+  theme_minimal()
 
-print(comparison_plot)
+print(chart_2)
 
-# Prepare data for the map
-data <- data %>%
-  mutate(state = tolower(state))
-usa_map <- map_data("state")
+# creating a map
+prison_pop <- read.csv("https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-pop.csv")
+prison_rate <- read.csv("https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates.csv")
 
-# Merge data with map data
-data_state_map <- left_join(usa_map, data, by = c("region" = "state"))
+black_prison_rate_2010 <- prison_rate %>%
+  filter(year == 2010) %>%
+  group_by(state) %>%
+  summarize(states_black_prison_pop_rate = mean(black_prison_pop_rate, na.rm = TRUE))
 
-# Define the color scale and custom breaks
-custom_breaks <- c(0, 50000, 100000, 250000, 500000, 1000000)
-color_scale <- scale_fill_gradient(
-  low = "lightcoral",
-  high = "darkred",
-  breaks = custom_breaks,
-  labels = comma_format(scale = 1e-6),
-  name = "Total Prison Population"
-)
+us_map <- map_data("state")
+us_map$region <- toupper(str_sub(us_map$region, 1, 2))
+map_black_prison_pop_rate <- left_join(us_map, black_prison_rate_2010,
+                                       by = c("region" = "state"))
 
-# Create the map using the merged data, where the fill is based on the prison population in each state.
-prison_pop_map <- ggplot() +
-  geom_polygon(data = data_state_map, aes(x = long, y = lat, group = group, fill = total_pop),
-               color = "white", size = 0.1) +
-  color_scale +
-  labs(title = "Prison Population in the USA",
-       subtitle = "Data source: Vera Institute",
-       caption = "Note: Map not to scale") +
-  theme_minimal() +
-  coord_fixed()  # Use map-based coordinate system to set the aspect ratio
+blank_theme <- theme_bw() +
+  theme(
+    axis.line = element_blank(), 
+    axis.text = element_blank(), 
+    axis.ticks = element_blank(), 
+    axis.title = element_blank(),
+    plot.background = element_blank(), 
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(), 
+    panel.border = element_blank(), 
+  )
 
-# Display the map
-print(prison_pop_map)
+data_map <- ggplot(data = map_black_prison_pop_rate, aes(x = long, 
+                                                         y = lat, 
+                                                         group = group, 
+                                                         fill = states_black_prison_pop_rate)) +
+  geom_polygon(color = "black") +
+  scale_fill_gradient(name = "Avg. Prison Population Rate", low = "lightpink", high = "darkred") +
+  labs(title = "Average Black Prison Population per 100,00 People (Rate) by State (2010)") +
+  coord_map() +
+  blank_theme
+
+print(data_map)

@@ -18,13 +18,13 @@ The aim of this analysis is twofold: first, to understand the trajectory of pris
 As the sole researcher on this project, I have carefully chosen specific variables to analyze, considering their relevance in illuminating the complex dynamics of incarceration in America. Through this exploration, I seek to contribute to a broader understanding of the challenges faced by impacted communities and advocate for social justice and equity.
 
 ### Summary Information
-In this analysis, i have examined key variables related to the prison population per county/state. The mean total population is found to be 84,300.51, providing an average representation of the incarcerated population across the regions. On the other hand, the median total population is 22,970, representing the middle value of the prison population when arranged in ascending order.
+In this analysis, my focus revolves around pivotal variables linked to the prison population per county/state. Specifically, I've delved into the following variables:
 
-The standard deviation of the total population is quite high, standing at 303,312.1. This indicates significant variability in incarceration rates across different regions, suggesting potential disparities or areas of concern that warrant attention.
+The `mean_total_pop` showcases an average of approximately ***84,300.51***, offering insights into the typical representation of the incarcerated population across different regions. Contrasting this, the `max_total_pop` value stands out, reaching an impressive ***10,120,540***. This underlines areas grappling with the highest prison populations. On the other end of the spectrum, the `min_total_pop` value, set at ***0***, hints at regions with lower incarceration rates or potentially no incarcerated individuals.
 
-The maximum total population is recorded at 10,120,540, revealing areas with the highest prison population. In contrast, the minimum total population is zero, suggesting that some regions have relatively lower incarceration rates or possibly no incarcerated individuals.
+The `sd_total_pop` or standard deviation of `total_population` at ***303,312.1*** reveals considerable variability in incarceration rates across various regions. The `median_total_pop` was ***22970***.
 
-From these findings, I can deduce that there is considerable diversity in the prison population across counties/states, with some regions experiencing higher incarceration rates than others. The wide range of values highlights the need for a comprehensive and nuanced approach to address issues related to incarceration and criminal justice. Understanding such summary statistics can serve as a foundation for further investigations and policy development aimed at fostering more equitable and effective criminal justice systems.
+In summary, these insights illuminate substantial diversity within the prison population across counties/states. Certain regions experience notably higher incarceration rates than others. The wide range of values underscores the need for a holistic, nuanced approach to address incarceration and criminal justice issues. Armed with these summary statistics, we're poised for further exploration and policy development to foster an equitable and effective criminal justice system.
 
 ### The Dataset
 
@@ -59,26 +59,40 @@ In summary, while the dataset provided by the Vera Institute offers valuable inf
 
 
 ### Trends Over Time Chart
-#### Prison Population of the Top Two States in the US from 1970-2020
+#### Black to White Inmate Population Ratio in US from 1990 to present
 ```{r pressure, echo=FALSE}
-my_plot
+chart_1
 ```
 
-The Trends Over Time Chart illustrates the changes in the total incarcerated population across the two largest states, California and Texas, in the United States from the years 1970-2020. The chart shows a consistent upward trend in the incarcerated population, with yearly fluctuations and distinct differences between the two states. The visualization provides valuable insights into the complexities of the criminal justice system, shedding light on potential areas that warrant further investigation or policy attention. This analysis contributes to a deeper understanding of incarceration rates and their implications for social justice and equity, offering valuable context for broader discussions on this critical issue.
+The Trends Over Time Chart portrays the evolving dynamics of the black-to-white inmate population ratio in U.S. states starting from 1990. The chart highlights the shifts in these ratios over the years, showcasing variations among states and offering a comprehensive view of the racial disparities within the criminal justice system. This visualization serves as a valuable tool for analyzing the progress and challenges related to racial equity and incarceration, prompting thoughtful considerations for policy reforms and further research in this critical domain. The insights derived from this analysis contribute to a deeper comprehension of the complexities surrounding racial disparities in incarceration rates, fostering informed discussions on matters of social justice and fairness.
 
 ### Variable Comparison Chart
-#### White Prison Population vs. Black Prison Population
+#### Black Prison Population in King County, WA (1990-2018)
 ```{r, echo=FALSE}
-comparison_plot
+chart_2
 ```
 
-The Variable Comparison Chart illustrates the relationship between the white and black prison populations over time. The chart showcases a scatter plot with each point representing the corresponding data point in the dataset. The x-axis represents the 'White Prison Population,' and the y-axis represents the 'Black Prison Population.' As we observe the chart, we can discern patterns and trends that indicate how the two variables are related to each other. This comparison aims to shed light on any disparities or potential correlations in the prison populations between white and black individuals. As one can see the Black Prison Population extents into the 20,000s, while the White Prison Population does not exceed 10,000.
+The Variable Comparison Chart highlights the trajectory of the black prison population within King County, Washington, from 1990 to 2018. Depicted as a scatter plot, each data point corresponds to a specific year, allowing us to observe shifts and trends over time. The x-axis represents the years, while the y-axis indicates the 'Black Prison Population.' The chart enables the identification of patterns, fluctuations, and potential correlations in the incarceration rates of black individuals within the county. Notably, this visualization provides insights into the local dynamics of the criminal justice system and underscores the importance of examining demographic-specific trends. By observing the chart, we can gain a deeper understanding of the changes in the black prison population over this time period and its implications for criminal justice policies and societal discussions.
 
 ### Map
 #### Prison Population Map
 ```{r, echo=FALSE}
-prison_pop_map
+data_map
 ```
 
-The Prison Population Map displays the distribution of incarcerated individuals across the United States based on data sourced from the Vera Institute of Justice. Its inclusion in this analysis aims to visually reveal patterns and disparities in incarceration rates, shedding light on the complex dynamics of the criminal justice system. The map highlights regional concentrations of prison populations, indicating potential differences in state-level policies and practices. It also exposes disparities among states, emphasizing the need for equitable justice reforms. Correlations with demographics, such as race and socioeconomic status, are evident, underscoring the urgency of addressing issues related to mass incarceration and promoting evidence-based policies for a fairer justice system.
+The Prison Population Map provides a visual representation of the distribution of incarcerated individuals across the United States, drawing on data sourced from the Vera Institute of Justice. By integrating this map into the analysis, its purpose is to visually uncover patterns and disparities in incarceration rates, thereby illuminating the intricate dynamics within the criminal justice system. The map accentuates clusters of prison populations in various regions, indicating potential divergences in state-level policies and practices. Additionally, it brings attention to the disparities evident between states, underscoring the necessity for equitable justice reforms.
+
+Furthermore, the map exposes correlations between incarceration rates and demographic factors like race and socioeconomic status. These correlations underscore the urgency of addressing concerns linked to mass incarceration and advocate for the implementation of evidence-based policies to foster a more equitable justice system. As demonstrated by the new code, the visual representation of the average black prison population rate per 100,000 people per state in 2010 serves as a powerful tool to facilitate understanding, discussions, and potential reforms in the realm of criminal justice.
+
+
+
+
+
+
+
+
+
+
+
+
 
